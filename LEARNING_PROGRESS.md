@@ -6,25 +6,29 @@
 
 - **Dia atual:** 1
 - **Branch atual:** `main`
-- **Objetivo da sessão:**
+- **Objetivo da sessão:** concluir os fundamentos do Dia 1
 - **Última PR revisada:** nenhuma
-- **Tema que mais preciso reforçar:**
+- **Tema que mais preciso reforçar:** comandos de criação e mensagens de commit
 
 ## Dia 1 — HTTP, project/app, URLs, views e Git
 
-- [ ] Consigo explicar `request → URLconf → view → response` sem consultar.
-- [ ] Consigo recriar o projeto e a venv em uma pasta vazia.
-- [ ] Sei explicar working tree, staging area, commit e branch.
-- [ ] `.venv` e `.env` não são versionados.
+- [x] Consigo explicar `request → URLconf → view → response` sem consultar.
+- [x] Consigo recriar o projeto e a venv em uma pasta vazia.
+- [x] Sei explicar working tree, staging area, commit e branch.
+- [x] `.venv` e `.env` não são versionados.
 
 **O que implementei:**
-
+Inciei um projeto com django, aprendi sobre a estrutura d projeto, criei views e configurei os path da url
 **O que aprendi:**
-
+Como funciona a estrutura em um projeto com django, e os comando importans pra trabalhar no projeto
 **Dúvidas/buracos:**
-
+ainda esqueco um pouco os comandos, e tenho um pouco de duvida como comentar corretamente o commit
 **Feedback da revisão:**
-
+- manter o nome da view consistente com o URLconf;
+- importar classes antes de usá-las;
+- HttpResponse é instanciado, não possui .send();
+- aliases evitam colisão entre módulos chamados views;
+- commit registra a staging area no histórico.
 ---
 
 ## Dia 2 — Models, migrations, ORM e PostgreSQL
