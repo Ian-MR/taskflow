@@ -5,6 +5,9 @@ class Project(models.Model):
     name = models.CharField(max_length=120)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.name
+
 
 class Task(models.Model):
     class Status(models.TextChoices):
@@ -24,3 +27,6 @@ class Task(models.Model):
         default=Status.TODO,
     )
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
