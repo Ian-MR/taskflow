@@ -28,5 +28,13 @@ class Task(models.Model):
     )
     created_at = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        constraints = [
+            models.CheckConstraint(
+                condition=models.Q(status__in=["todo", "in_progress", "done"]),
+                name="task_status_valid",
+            ),
+        ]
+
     def __str__(self):
         return self.title
