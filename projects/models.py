@@ -1,3 +1,26 @@
 from django.db import models
 
-# Create your models here.
+
+class Project(models.Model):
+    name = models.CharField(max_length=120)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+
+class Task(models.Model):
+    class Status(models.TextChoices):
+        TODO = "todo", "A fazer"
+        IN_PROGRESS = "in_progress", "Em andamento"
+        DONE = "done", "Concluída"
+
+    project = models.ForeignKey(
+        Project,
+        on_delete=models.CASCADE,
+        related_name="tasks",
+    )
+    title = models.CharField(max_length=200)
+    status = models.CharField(
+        max_length=20,
+        choices=Status.choices,
+        default=Status.TODO,
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
