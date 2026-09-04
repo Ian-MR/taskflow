@@ -4,9 +4,9 @@
 
 ## Estado atual
 
-- **Dia atual:** 1
+- **Dia atual:** 2
 - **Branch atual:** `main`
-- **Objetivo da sessão:** concluir os fundamentos do Dia 1
+- **Objetivo da sessão:** models, migrations, ORM e PostgreSQL;
 - **Última PR revisada:** nenhuma
 - **Tema que mais preciso reforçar:** comandos de criação e mensagens de commit
 
@@ -33,13 +33,19 @@ ainda esqueco um pouco os comandos, e tenho um pouco de duvida como comentar cor
 
 ## Dia 2 — Models, migrations, ORM e PostgreSQL
 
-- [ ] Sei explicar classe Model → migration → schema.
-- [ ] Sei quando usar `ForeignKey` e `ManyToManyField`.
-- [ ] Entendo QuerySet lazy.
-- [ ] Sei explicar por que migration entra no Git.
+- [x] Sei explicar classe Model → migration → schema.
+- [x] Sei quando usar `ForeignKey` e `ManyToManyField`.
+- [x] Entendo QuerySet lazy.
+- [x] Sei explicar por que migration entra no Git.
 
 **Notas:**
-
+- Project e Task com ForeignKey;
+- migrations 0001 e 0002;
+- diferença entre makemigrations e migrate;
+- QuerySet lazy;
+- choices versus CheckConstraint;
+- PostgreSQL 18.6 e autenticação SCRAM;
+- risco de duplicação dos valores de status.
 ---
 
 ## Dia 3 — Forms, templates e configuração
