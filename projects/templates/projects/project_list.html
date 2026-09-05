@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Projetos | TaskFlow{% endblock %}
+
+{% block content %}
+    <h2>Projetos</h2>
+    <a href="{% url 'project-create' %}">Novo projeto</a>
+    <ul>
+        {% for project in projects %}
+            <li>
+                <a href="{% url 'project-detail' project.pk %}">{{ project.name }}</a>
+            </li>
+        {% empty %}
+            <li>Nenhum Projeto cadastrado</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

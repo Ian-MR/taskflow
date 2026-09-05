@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}{{ project.name }} | TaskFlow{% endblock %}
+
+{% block content %}
+    <h2>{{ project.name }}</h2>
+    <p>Criado em: {{ project.created_at|date:"d/m/Y H:i" }}</p>
+
+    <a href="{% url 'project-update' project.pk %}">Editar</a>
+    <a href="{% url 'project-list' %}">Voltar</a>
+{% endblock %}

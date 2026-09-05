@@ -4,10 +4,10 @@
 
 ## Estado atual
 
-- **Dia atual:** 2
-- **Branch atual:** `main`
-- **Objetivo da sessão:** models, migrations, ORM e PostgreSQL;
-- **Última PR revisada:** nenhuma
+- **Dia atual:** 4
+- **Branch atual:** `feat/project-permissions`
+- **Objetivo da sessão:** authentication, authorization e revisão
+- **Última PR revisada:** `feat/project-permissions — APPROVE`
 - **Tema que mais preciso reforçar:** comandos de criação e mensagens de commit
 
 ## Dia 1 — HTTP, project/app, URLs, views e Git
@@ -50,24 +50,32 @@ ainda esqueco um pouco os comandos, e tenho um pouco de duvida como comentar cor
 
 ## Dia 3 — Forms, templates e configuração
 
-- [ ] Validação importante existe no backend.
-- [ ] Consigo explicar template inheritance.
-- [ ] Nenhum segredo está no Git.
-- [ ] Sei diferenciar configuração local e production.
+- [x] Validação importante existe no backend.
+- [x] Consigo explicar template inheritance.
+- [x] Nenhum segredo está no Git.
+- [x] Sei diferenciar configuração local e production.
 
 **Notas:**
-
+- template inheritance com `base.html`;
+- context conecta dados da view ao template;
+- ModelForm valida criação e edição;
+- `instance=project` diferencia update de insert;
+- `.env` guarda valores locais e `.env.example` documenta as variáveis;
+- `SECRET_KEY` foi rotacionada e movida para o ambiente.
 ---
 
 ## Dia 4 — Auth, autorização e Pull Request
 
-- [ ] Sei diferenciar authentication de authorization.
-- [ ] Tenho teste de acesso cruzado entre usuários.
-- [ ] Trabalho em branch e reviso meu próprio diff.
-- [ ] A PR passou por review do Codex em modo sênior.
+- [x] Sei diferenciar authentication de authorization.
+- [x] Tenho teste de acesso cruzado entre usuários.
+- [x] Trabalho em branch e reviso meu próprio diff.
+- [x] A PR passou por review do Codex em modo sênior.
 
 **Notas:**
-
+- authentication comprovada pelo redirect de usuário anônimo;
+- autorização comprovada manualmente: user_a não acessa o projeto 3 e user_b não acessa o projeto 2;
+- `owner` permanece nullable durante a fase de expansão, até existir um backfill reproduzível;
+- revisão local feita contra `main`, pois ainda não existe remoto configurado.
 ---
 
 ## Dia 5 — Código sustentável e Ruff

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}{% if project %}Editar projeto{% else %}Novo projeto{% endif %} | TaskFlow{% endblock %}
+
+{% block content %}
+    {% if project %}
+        <h2>Editar projeto</h2>
+    {% else %}
+        <h2>Novo projeto</h2>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Salvar</button>
+    </form>
+
+    <a href="{% url 'project-list' %}">Voltar</a>
+{% endblock %}
