@@ -7,21 +7,21 @@ from projects.models import Project
 
 @login_required
 def project_list(request):
-    projects = Project.objects.filter(owner=request.user)
+    projects = Project.objects.owned_by(request.user)
     context = {"projects": projects}
     return render(request, "projects/project_list.html", context)
 
 
 @login_required
 def project_detail(request, pk):
-    project = get_object_or_404(Project, pk=pk, owner=request.user)
+    project = get_object_or_404(Project.objects.owned_by(request.user), pk=pk)
     context = {"project": project}
     return render(request, "projects/project_detail.html", context)
 
 
 @login_required
 def project_update(request, pk):
-    project = get_object_or_404(Project, pk=pk, owner=request.user)
+    project = get_object_or_404(Project.objects.owned_by(request.user), pk=pk)
 
     if request.method == "POST":
         form = ProjectForm(request.POST, instance=project)

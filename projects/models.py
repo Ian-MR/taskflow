@@ -2,7 +2,13 @@ from django.conf import settings
 from django.db import models
 
 
+class ProjectQuerySet(models.QuerySet):
+    def owned_by(self, user):
+        return self.filter(owner=user)
+
+
 class Project(models.Model):
+    objects = ProjectQuerySet.as_manager()
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,

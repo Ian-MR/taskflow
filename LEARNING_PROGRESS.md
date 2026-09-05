@@ -4,11 +4,11 @@
 
 ## Estado atual
 
-- **Dia atual:** 4
-- **Branch atual:** `feat/project-permissions`
-- **Objetivo da sessão:** authentication, authorization e revisão
-- **Última PR revisada:** `feat/project-permissions — APPROVE`
-- **Tema que mais preciso reforçar:** comandos de criação e mensagens de commit
+- **Dia atual:** 5
+- **Branch atual:** `chore/code-quality`
+- **Objetivo da sessão:** queries reutilizáveis, organização de código e qualidade automática
+- **Última PR revisada:** `chore/code-quality — APPROVE`
+- **Tema que mais preciso reforçar:** diferença entre lint e format e uso de QuerySet customizado
 
 ## Dia 1 — HTTP, project/app, URLs, views e Git
 
@@ -29,6 +29,7 @@ ainda esqueco um pouco os comandos, e tenho um pouco de duvida como comentar cor
 - HttpResponse é instanciado, não possui .send();
 - aliases evitam colisão entre módulos chamados views;
 - commit registra a staging area no histórico.
+
 ---
 
 ## Dia 2 — Models, migrations, ORM e PostgreSQL
@@ -46,6 +47,7 @@ ainda esqueco um pouco os comandos, e tenho um pouco de duvida como comentar cor
 - choices versus CheckConstraint;
 - PostgreSQL 18.6 e autenticação SCRAM;
 - risco de duplicação dos valores de status.
+
 ---
 
 ## Dia 3 — Forms, templates e configuração
@@ -62,6 +64,7 @@ ainda esqueco um pouco os comandos, e tenho um pouco de duvida como comentar cor
 - `instance=project` diferencia update de insert;
 - `.env` guarda valores locais e `.env.example` documenta as variáveis;
 - `SECRET_KEY` foi rotacionada e movida para o ambiente.
+
 ---
 
 ## Dia 4 — Auth, autorização e Pull Request
@@ -76,16 +79,22 @@ ainda esqueco um pouco os comandos, e tenho um pouco de duvida como comentar cor
 - autorização comprovada manualmente: user_a não acessa o projeto 3 e user_b não acessa o projeto 2;
 - `owner` permanece nullable durante a fase de expansão, até existir um backfill reproduzível;
 - revisão local feita contra `main`, pois ainda não existe remoto configurado.
+
 ---
 
 ## Dia 5 — Código sustentável e Ruff
 
-- [ ] Ruff passa.
-- [ ] Consigo justificar QuerySet/Manager/service usados.
-- [ ] Removi duplicação real sem abstração prematura.
-- [ ] Consigo apontar um trade-off da minha estrutura atual.
+- [x] Ruff passa.
+- [x] Consigo justificar QuerySet/Manager/service usados.
+- [x] Removi duplicação real sem abstração prematura.
+- [x] Consigo apontar um trade-off da minha estrutura atual.
 
 **Notas:**
+- Ruff configurado como linter e formatter;
+- pre-commit executa Ruff antes de commits com arquivos Python;
+- `ProjectQuerySet.owned_by()` centraliza a consulta por owner;
+- views atuais permanecem pequenas; não foi criado service sem necessidade;
+- trade-off: `owned_by()` facilita uso seguro, mas não impede consultas que esqueçam o escopo do owner.
 
 ---
 
