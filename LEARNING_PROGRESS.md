@@ -4,11 +4,11 @@
 
 ## Estado atual
 
-- **Dia atual:** 7
-- **Branch atual:** `feat/orm-ci`
-- **Objetivo da sessão:** performance ORM, integração contínua e proteção da main
+- **Dia atual:** 8
+- **Branch atual:** `feat/docker-dev`
+- **Objetivo da sessão:** ambiente de desenvolvimento reproduzível com Docker e Compose
 - **Última PR revisada:** `feat/orm-ci — APPROVE`
-- **Tema que mais preciso reforçar:** escolher entre select_related, prefetch_related e annotate
+- **Tema que mais preciso reforçar:** diferença entre image/container e bind mount/volume
 
 ## Dia 1 — HTTP, project/app, URLs, views e Git
 
@@ -134,13 +134,21 @@ ainda esqueco um pouco os comandos, e tenho um pouco de duvida como comentar cor
 
 ## Dia 8 — Docker / Compose
 
-- [ ] Sei explicar image, container, layer e Dockerfile.
-- [ ] Sei explicar volume versus bind mount.
-- [ ] Entendo networking do Compose e por que `localhost` costuma estar errado entre containers.
-- [ ] `docker compose up` inicia app + PostgreSQL.
-- [ ] Sei dizer quais dados sobrevivem a `docker compose down`.
+- [x] Sei explicar image, container, layer e Dockerfile.
+- [x] Sei explicar volume versus bind mount.
+- [x] Entendo networking do Compose e por que `localhost` costuma estar errado entre containers.
+- [x] `docker compose up` inicia app + PostgreSQL.
+- [x] Sei dizer quais dados sobrevivem a `docker compose down`.
 
 **Notas:**
+- Dockerfile de desenvolvimento usa Python 3.13 e instala `requirements-dev.txt`;
+- image é o modelo em layers; container é uma instância executável e descartável;
+- bind mount `.:/app` sincroniza o código local com o container;
+- named volume `postgres_data` preserva os dados do PostgreSQL;
+- serviços do Compose se encontram por DNS: Django usa `db:5432`, não `localhost`;
+- PostgreSQL 18 usa o volume em `/var/lib/postgresql`;
+- `docker compose down` preserva o volume; `down -v` também o remove;
+- stack completa iniciou e os 7 testes passaram dentro do container.
 
 ---
 
