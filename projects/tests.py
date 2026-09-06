@@ -150,6 +150,10 @@ class ProjectListQueryTests(TestCase):
             name="Projeto vazio",
             owner=self.user,
         )
+        self.project_with_one_task = Project.objects.create(
+            name="Projeto com uma tarefa",
+            owner=self.user,
+        )
         Task.objects.create(
             project=self.project_with_tasks,
             title="Primeira Tarefa",
@@ -157,6 +161,10 @@ class ProjectListQueryTests(TestCase):
         Task.objects.create(
             project=self.project_with_tasks,
             title="Segunda tarefa",
+        )
+        Task.objects.create(
+            project=self.project_with_one_task,
+            title="Tarefa única",
         )
 
     def test_list_displays_task_counts_without_n_plus_one(self):
@@ -170,3 +178,4 @@ class ProjectListQueryTests(TestCase):
         # Assert
         self.assertContains(response, "2 tarefas")
         self.assertContains(response, "0 tarefas")
+        self.assertContains(response, "<span>1 tarefa</span>", html=True)

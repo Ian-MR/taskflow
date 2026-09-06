@@ -9,7 +9,7 @@
         {% for project in projects %}
             <li>
                 <a href="{% url 'project-detail' project.pk %}">{{ project.name }}</a>
-                <span>{{ project.task_count }} tarefas</span>
+                <span>{{ project.task_count }} tarefa{{ project.task_count|pluralize }}</span>
             </li>
         {% empty %}
             <li>Nenhum Projeto cadastrado</li>
