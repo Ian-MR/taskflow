@@ -6,6 +6,9 @@ class ProjectQuerySet(models.QuerySet):
     def owned_by(self, user):
         return self.filter(owner=user)
 
+    def with_task_count(self):
+        return self.annotate(task_count=models.Count("tasks"))
+
 
 class Project(models.Model):
     objects = ProjectQuerySet.as_manager()

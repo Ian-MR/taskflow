@@ -7,7 +7,7 @@ from projects.models import Project
 
 @login_required
 def project_list(request):
-    projects = Project.objects.owned_by(request.user)
+    projects = Project.objects.owned_by(request.user).with_task_count()
     context = {"projects": projects}
     return render(request, "projects/project_list.html", context)
 
