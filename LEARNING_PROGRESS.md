@@ -7,7 +7,7 @@
 - **Dia atual:** 8
 - **Branch atual:** `feat/docker-dev`
 - **Objetivo da sessão:** ambiente de desenvolvimento reproduzível com Docker e Compose
-- **Última PR revisada:** `feat/orm-ci — APPROVE`
+- **Última PR revisada:** `feat/docker-dev — APPROVE`
 - **Tema que mais preciso reforçar:** diferença entre image/container e bind mount/volume
 
 ## Dia 1 — HTTP, project/app, URLs, views e Git
