@@ -4,11 +4,11 @@
 
 ## Estado atual
 
-- **Dia atual:** 6
-- **Branch atual:** `test/project-behavior`
-- **Objetivo da sessão:** testes independentes de criação, validação e autorização
-- **Última PR revisada:** `test/project-behavior — APPROVE`
-- **Tema que mais preciso reforçar:** identificar Arrange, Act e Assert em cada cenário
+- **Dia atual:** 7
+- **Branch atual:** `feat/orm-ci`
+- **Objetivo da sessão:** performance ORM, integração contínua e proteção da main
+- **Última PR revisada:** `feat/orm-ci — APPROVE`
+- **Tema que mais preciso reforçar:** escolher entre select_related, prefetch_related e annotate
 
 ## Dia 1 — HTTP, project/app, URLs, views e Git
 
@@ -116,12 +116,19 @@ ainda esqueco um pouco os comandos, e tenho um pouco de duvida como comentar cor
 
 ## Dia 7 — ORM eficiente e CI
 
-- [ ] Sei reconhecer N+1.
-- [ ] Sei diferenciar `select_related` de `prefetch_related`.
-- [ ] CI executa checks/testes.
-- [ ] Sei explicar CI versus CD.
+- [x] Sei reconhecer N+1.
+- [x] Sei diferenciar `select_related` de `prefetch_related`.
+- [x] CI executa checks/testes.
+- [x] Sei explicar CI versus CD.
 
 **Notas:**
+- N+1 reproduzido com 5 queries onde eram esperadas 3;
+- `annotate(Count("tasks"))` mantém a listagem em 3 queries;
+- `LEFT OUTER JOIN` preserva projetos com zero tarefas;
+- `select_related` atende relações únicas e `prefetch_related` atende coleções;
+- GitHub Actions executa Ruff, Django checks, migrations check e 7 testes no PostgreSQL 18.6;
+- branch `main` exige PR e o status check `checks` verde;
+- CI valida mudanças; CD entrega ou implanta o código depois dos checks.
 
 ---
 

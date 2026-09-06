@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
 
-from projects.models import Project
+from projects.models import Project, Task
 
 
 class ProjectCreateTests(TestCase):
@@ -133,3 +133,49 @@ class ProjectPermissionTests(TestCase):
         self.project.refresh_from_db()
         self.assertEqual(self.project.name, "Projeto atualizado")
         self.assertEqual(Project.objects.count(), 1)
+
+
+class ProjectListQueryTests(TestCase):
+    def setUp(self):
+        User = get_user_model()
+        self.user = User.objects.create_user(
+            username="owner",
+            password="test-password",
+        )
+        self.project_with_tasks = Project.objects.create(
+            name="Projeto com tarefas",
+            owner=self.user,
+        )
+        Project.objects.create(
+            name="Projeto vazio",
+            owner=self.user,
+        )
+        self.project_with_one_task = Project.objects.create(
+            name="Projeto com uma tarefa",
+            owner=self.user,
+        )
+        Task.objects.create(
+            project=self.project_with_tasks,
+            title="Primeira Tarefa",
+        )
+        Task.objects.create(
+            project=self.project_with_tasks,
+            title="Segunda tarefa",
+        )
+        Task.objects.create(
+            project=self.project_with_one_task,
+            title="Tarefa única",
+        )
+
+    def test_list_displays_task_counts_without_n_plus_one(self):
+        # Arrange
+        self.client.force_login(self.user)
+
+        # Act
+        with self.assertNumQueries(3):
+            response = self.client.get(reverse("project-list"))
+
+        # Assert
+        self.assertContains(response, "2 tarefas")
+        self.assertContains(response, "0 tarefas")
+        self.assertContains(response, "<span>1 tarefa</span>", html=True)
