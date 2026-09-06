@@ -4,11 +4,11 @@
 
 ## Estado atual
 
-- **Dia atual:** 5
-- **Branch atual:** `chore/code-quality`
-- **Objetivo da sessão:** queries reutilizáveis, organização de código e qualidade automática
-- **Última PR revisada:** `chore/code-quality — APPROVE`
-- **Tema que mais preciso reforçar:** diferença entre lint e format e uso de QuerySet customizado
+- **Dia atual:** 6
+- **Branch atual:** `test/project-behavior`
+- **Objetivo da sessão:** testes independentes de criação, validação e autorização
+- **Última PR revisada:** `test/project-behavior — APPROVE`
+- **Tema que mais preciso reforçar:** identificar Arrange, Act e Assert em cada cenário
 
 ## Dia 1 — HTTP, project/app, URLs, views e Git
 
@@ -100,12 +100,17 @@ ainda esqueco um pouco os comandos, e tenho um pouco de duvida como comentar cor
 
 ## Dia 6 — Testes
 
-- [ ] Testes são independentes e determinísticos.
-- [ ] Tenho testes de permissão e validação.
-- [ ] Sei explicar Arrange–Act–Assert.
-- [ ] Um bug relevante ganhou teste de regressão.
+- [x] Testes são independentes e determinísticos.
+- [x] Tenho testes de permissão e validação.
+- [x] Sei explicar Arrange–Act–Assert.
+- [x] Um bug relevante ganhou teste de regressão.
 
 **Notas:**
+- suíte com 6 testes executada também em ordem aleatória;
+- `TestCase` usa banco isolado e cada teste prepara seus próprios dados;
+- criação válida, formulário inválido, usuário anônimo e acesso entre owners estão protegidos;
+- `refresh_from_db()` confirma o estado realmente persistido;
+- role PostgreSQL local recebeu `CREATEDB` para criar o banco de teste; produção não deve receber essa permissão.
 
 ---
 
