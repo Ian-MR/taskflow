@@ -4,11 +4,11 @@
 
 ## Estado atual
 
-- **Dia atual:** 8
-- **Branch atual:** `feat/docker-dev`
-- **Objetivo da sessão:** ambiente de desenvolvimento reproduzível com Docker e Compose
+- **Dia atual:** 9
+- **Branch atual:** `feat/production-readiness`
+- **Objetivo da sessão:** settings por ambiente, segurança e image de produção
 - **Última PR revisada:** `feat/docker-dev — APPROVE`
-- **Tema que mais preciso reforçar:** diferença entre image/container e bind mount/volume
+- **Tema que mais preciso reforçar:** HSTS, proxy HTTPS e entrega de static files
 
 ## Dia 1 — HTTP, project/app, URLs, views e Git
 
@@ -154,12 +154,23 @@ ainda esqueco um pouco os comandos, e tenho um pouco de duvida como comentar cor
 
 ## Dia 9 — Staging e produção
 
-- [ ] Sei explicar `DEBUG`, `ALLOWED_HOSTS` e secrets.
-- [ ] Sei por que `runserver` não é servidor de produção.
-- [ ] `check --deploy` foi entendido/executado.
-- [ ] Sei diferenciar local, test, staging e production.
+- [x] Sei explicar `DEBUG`, `ALLOWED_HOSTS` e secrets.
+- [x] Sei por que `runserver` não é servidor de produção.
+- [x] `check --deploy` foi entendido/executado.
+- [x] Sei diferenciar local, test, staging e production.
 
 **Notas:**
+- settings separados em `base`, `development` e `production`;
+- development carrega `.env`, usa `DEBUG=True` e e-mail no console;
+- production exige hosts e HSTS pelo ambiente, usa `DEBUG=False` e cookies seguros;
+- `check --deploy` deixou apenas warnings de HSTS para subdomínios e preload, adiados até existir domínio real;
+- Gunicorn 26.2 substitui `runserver` e executa com dois workers;
+- control socket do Gunicorn foi desabilitado porque o container não precisa de `gunicornc`;
+- image de produção executa como usuário `django`, não contém `.env`, Ruff ou dependências de desenvolvimento;
+- `collectstatic` incorporou 130 arquivos à image; proxy ou plataforma ainda deverá servi-los;
+- staging e production usam a mesma image, mas bancos, domínios e secrets separados;
+- CI valida os settings e constrói a image de produção;
+- a mudança de localização de `settings.py` exigiu corrigir o cálculo de `BASE_DIR`.
 
 ---
 
