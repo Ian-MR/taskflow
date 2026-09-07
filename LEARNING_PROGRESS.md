@@ -7,7 +7,7 @@
 - **Dia atual:** 9
 - **Branch atual:** `feat/production-readiness`
 - **Objetivo da sessão:** settings por ambiente, segurança e image de produção
-- **Última PR revisada:** `feat/docker-dev — APPROVE`
+- **Última PR revisada:** `feat/production-readiness — APPROVE`
 - **Tema que mais preciso reforçar:** HSTS, proxy HTTPS e entrega de static files
 
 ## Dia 1 — HTTP, project/app, URLs, views e Git
