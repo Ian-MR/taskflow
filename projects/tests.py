@@ -1,8 +1,17 @@
 from django.contrib.auth import get_user_model
+from django.db import IntegrityError, transaction
 from django.test import TestCase
 from django.urls import reverse
 
 from projects.models import Project, Task
+
+
+class ProjectModelTests(TestCase):
+    def test_project_owner_is_required_by_database(self):
+        # Act and Assert
+        with self.assertRaises(IntegrityError):
+            with transaction.atomic():
+                Project.objects.create(name="Projeto sem owner")
 
 
 class ProjectCreateTests(TestCase):
