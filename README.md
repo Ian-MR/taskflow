@@ -13,6 +13,7 @@ O projeto cobre autenticação e autorização, PostgreSQL, testes automatizados
 - Gunicorn
 - Ruff
 - GitHub Actions
+- WhiteNoise
 
 ## Requisitos
 
@@ -127,9 +128,9 @@ A configuração de produção exige estas variáveis:
 - `TASKFLOW_ALLOWED_HOSTS`: hosts separados por vírgula;
 - `TASKFLOW_SECURE_HSTS_SECONDS`: duração do HSTS em segundos.
 
-As variáveis `TASKFLOW_DB_NAME`, `TASKFLOW_DB_USER`, `TASKFLOW_DB_HOST` e `TASKFLOW_DB_PORT` também podem ser configuradas para apontar para o PostgreSQL do ambiente.
+As variáveis `TASKFLOW_DB_NAME`, `TASKFLOW_DB_USER`, `TASKFLOW_DB_HOST`, `TASKFLOW_DB_PORT` e `TASKFLOW_DB_SSLMODE` também podem ser configuradas. Em produção, `TASKFLOW_DB_SSLMODE` usa `require` por padrão.
 
-A imagem executa a aplicação com Gunicorn e um usuário sem privilégios. Segredos não são copiados para a imagem. A infraestrutura de produção também deve fornecer PostgreSQL, HTTPS e a entrega dos arquivos estáticos.
+A imagem executa a aplicação com Gunicorn e um usuário sem privilégios. Segredos não são copiados para a imagem. WhiteNoise entrega os arquivos estáticos, enquanto a infraestrutura fornece PostgreSQL e HTTPS.
 
 ## Estratégia de migrations e rollback
 
