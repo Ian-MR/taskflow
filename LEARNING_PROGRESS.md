@@ -4,11 +4,11 @@
 
 ## Estado atual
 
-- **Dia atual:** 9
-- **Branch atual:** `feat/production-readiness`
-- **Objetivo da sessão:** settings por ambiente, segurança e image de produção
+- **Dia atual:** 10
+- **Branch atual:** `release/v0.1.0`
+- **Objetivo da sessão:** publicar artefato imutável, fazer deploy e validar rollback
 - **Última PR revisada:** `feat/production-readiness — APPROVE`
-- **Tema que mais preciso reforçar:** HSTS, proxy HTTPS e entrega de static files
+- **Tema que mais preciso reforçar:** publicação por digest e rollback separado entre aplicação e banco
 
 ## Dia 1 — HTTP, project/app, URLs, views e Git
 
@@ -176,14 +176,21 @@ ainda esqueco um pouco os comandos, e tenho um pouco de duvida como comentar cor
 
 ## Dia 10 — Release, migration e rollback
 
-- [ ] Sei explicar artefato imutável.
+- [x] Sei explicar artefato imutável.
 - [ ] Criei uma tag de release.
-- [ ] Entendo expand/migrate/switch/contract.
-- [ ] Sei explicar estratégia de rollback e seus limites com banco.
-- [ ] README permite outra pessoa iniciar o projeto.
+- [x] Entendo expand/migrate/switch/contract.
+- [x] Sei explicar estratégia de rollback e seus limites com banco.
+- [x] README permite outra pessoa iniciar o projeto.
 - [ ] PR/release final recebeu review sênior.
 
 **Notas:**
+- a migration de dados atribui projetos órfãos a uma conta técnica inativa e sem senha utilizável;
+- a migration seguinte torna `Project.owner` obrigatório no banco;
+- o fluxo de migration foi validado em um banco temporário, inclusive com conflito da conta técnica;
+- a image de produção usa Gunicorn, usuário sem privilégios, porta configurável e WhiteNoise;
+- a mesma image foi validada com PostgreSQL do staging;
+- o workflow de release publicará no GHCR uma tag SemVer e uma tag ligada ao commit;
+- rollback da aplicação reutiliza uma image anterior; rollback do banco precisa ser analisado separadamente.
 
 ---
 
