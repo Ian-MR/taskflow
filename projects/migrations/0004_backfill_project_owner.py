@@ -32,6 +32,7 @@ def backfill_project_owner(apps, schema_editor):
 class Migration(migrations.Migration):
     dependencies = [
         ("projects", "0003_project_owner"),
+        ("auth", "0005_alter_user_last_login_null"),
     ]
 
     operations = [
