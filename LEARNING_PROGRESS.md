@@ -5,10 +5,10 @@
 ## Estado atual
 
 - **Dia atual:** 10
-- **Branch atual:** `release/v0.1.0`
+- **Branch atual:** `docs/complete-day-10`
 - **Objetivo da sessão:** publicar artefato imutável, fazer deploy e validar rollback
-- **Última PR revisada:** `feat/production-readiness — APPROVE`
-- **Tema que mais preciso reforçar:** publicação por digest e rollback separado entre aplicação e banco
+- **Última PR revisada:** `release/v0.1.0 — APPROVE`
+- **Tema que mais preciso reforçar:** automatização do deploy e rollback entre versões diferentes
 
 ## Dia 1 — HTTP, project/app, URLs, views e Git
 
@@ -177,11 +177,11 @@ ainda esqueco um pouco os comandos, e tenho um pouco de duvida como comentar cor
 ## Dia 10 — Release, migration e rollback
 
 - [x] Sei explicar artefato imutável.
-- [ ] Criei uma tag de release.
+- [x] Criei uma tag de release.
 - [x] Entendo expand/migrate/switch/contract.
 - [x] Sei explicar estratégia de rollback e seus limites com banco.
 - [x] README permite outra pessoa iniciar o projeto.
-- [ ] PR/release final recebeu review sênior.
+- [x] PR/release final recebeu review sênior.
 
 **Notas:**
 - a migration de dados atribui projetos órfãos a uma conta técnica inativa e sem senha utilizável;
@@ -189,8 +189,16 @@ ainda esqueco um pouco os comandos, e tenho um pouco de duvida como comentar cor
 - o fluxo de migration foi validado em um banco temporário, inclusive com conflito da conta técnica;
 - a image de produção usa Gunicorn, usuário sem privilégios, porta configurável e WhiteNoise;
 - a mesma image foi validada com PostgreSQL do staging;
-- o workflow de release publicará no GHCR uma tag SemVer e uma tag ligada ao commit;
+- o workflow de release publicou no GHCR uma tag SemVer e uma tag ligada ao commit;
 - rollback da aplicação reutiliza uma image anterior; rollback do banco precisa ser analisado separadamente.
+- a tag `v0.1.0` aponta para o commit revisado da `main`;
+- o GHCR publicou a image por tag e pelo digest imutável;
+- a branch de produção do Neon foi migrada após a criação de `backup-pre-v0.1.0`;
+- a release foi implantada no Render usando exatamente o digest publicado;
+- o primeiro health check retornou `400` porque `ALLOWED_HOSTS` estava incorreto;
+- após corrigir o hostname, health check, autenticação, PostgreSQL e static files foram validados;
+- o rollback entre deploys foi simulado e os dados permaneceram;
+- como esta é a primeira versão, um downgrade real de código dependerá de uma release futura.
 
 ---
 
