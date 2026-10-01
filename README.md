@@ -1,8 +1,43 @@
-# TaskFlow
+# Personal Finance Manager
 
-Aplicação web para gerenciamento de projetos e tarefas, desenvolvida como projeto de estudo de Django e engenharia de backend.
+Plataforma pessoal de controle financeiro desenvolvida com Django.
 
-O projeto cobre autenticação e autorização, PostgreSQL, testes automatizados, otimização de queries, CI, Docker e preparação para produção.
+O projeto começou como TaskFlow, uma aplicação de gerenciamento de projetos
+usada durante a Fase 1 de aprendizado. Na Fase 2, o repositório evoluirá
+gradualmente para um gerenciador pessoal de despesas.
+
+A versão da Fase 1 permanece preservada pela tag `v0.1.0`.
+
+## Estado atual
+
+O projeto está no início da Fase 2.
+
+A implementação existente ainda contém o domínio legado do TaskFlow.
+A transição para o domínio financeiro será feita gradualmente durante os
+próximos tickets.
+
+## Objetivo da V1
+
+A primeira versão do produto permitirá que cada usuário:
+
+- registre receitas e despesas;
+- organize transações por categorias;
+- consulte seu histórico financeiro por período;
+- visualize totais de receitas, despesas e resultado;
+- acesse somente seus próprios dados financeiros.
+
+## Fora do escopo da V1
+
+A V1 não inclui:
+
+- contas bancárias e transferências;
+- cartões de crédito e faturas;
+- parcelas e transações recorrentes;
+- orçamentos, metas e previsões;
+- importação de CSV ou OFX;
+- integração com Open Finance;
+- React;
+- Celery, Redis ou microserviços.
 
 ## Tecnologias
 
