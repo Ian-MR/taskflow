@@ -1,221 +1,192 @@
-# Learning Progress — TaskFlow
+# LEARNING_PROGRESS.md — Phase 2
 
-> Atualize este arquivo no fim de cada sessão. Ele existe para o Codex entender seu estágio sem assumir que uma feature pronta significa que o conceito foi aprendido.
+This is not a checklist of technologies.
 
-## Estado atual
-
-- **Dia atual:** 10
-- **Branch atual:** `docs/complete-day-10`
-- **Objetivo da sessão:** publicar artefato imutável, fazer deploy e validar rollback
-- **Última PR revisada:** `release/v0.1.0 — APPROVE`
-- **Tema que mais preciso reforçar:** automatização do deploy e rollback entre versões diferentes
-
-## Dia 1 — HTTP, project/app, URLs, views e Git
-
-- [x] Consigo explicar `request → URLconf → view → response` sem consultar.
-- [x] Consigo recriar o projeto e a venv em uma pasta vazia.
-- [x] Sei explicar working tree, staging area, commit e branch.
-- [x] `.venv` e `.env` não são versionados.
-
-**O que implementei:**
-Inciei um projeto com django, aprendi sobre a estrutura d projeto, criei views e configurei os path da url
-**O que aprendi:**
-Como funciona a estrutura em um projeto com django, e os comando importans pra trabalhar no projeto
-**Dúvidas/buracos:**
-ainda esqueco um pouco os comandos, e tenho um pouco de duvida como comentar corretamente o commit
-**Feedback da revisão:**
-- manter o nome da view consistente com o URLconf;
-- importar classes antes de usá-las;
-- HttpResponse é instanciado, não possui .send();
-- aliases evitam colisão entre módulos chamados views;
-- commit registra a staging area no histórico.
+Use it to record demonstrated engineering growth.
 
 ---
 
-## Dia 2 — Models, migrations, ORM e PostgreSQL
+## Starting point
 
-- [x] Sei explicar classe Model → migration → schema.
-- [x] Sei quando usar `ForeignKey` e `ManyToManyField`.
-- [x] Entendo QuerySet lazy.
-- [x] Sei explicar por que migration entra no Git.
+Phase 1 completed:
 
-**Notas:**
-- Project e Task com ForeignKey;
-- migrations 0001 e 0002;
-- diferença entre makemigrations e migrate;
-- QuerySet lazy;
-- choices versus CheckConstraint;
-- PostgreSQL 18.6 e autenticação SCRAM;
-- risco de duplicação dos valores de status.
+- Django fundamentals;
+- ORM / QuerySets;
+- ownership-based authorization;
+- database constraints;
+- PostgreSQL;
+- migrations;
+- tests;
+- Docker;
+- production settings;
+- CI;
+- release artifact flow;
+- Git/PR workflow.
 
----
+Phase 2 focus:
 
-## Dia 3 — Forms, templates e configuração
-
-- [x] Validação importante existe no backend.
-- [x] Consigo explicar template inheritance.
-- [x] Nenhum segredo está no Git.
-- [x] Sei diferenciar configuração local e production.
-
-**Notas:**
-- template inheritance com `base.html`;
-- context conecta dados da view ao template;
-- ModelForm valida criação e edição;
-- `instance=project` diferencia update de insert;
-- `.env` guarda valores locais e `.env.example` documenta as variáveis;
-- `SECRET_KEY` foi rotacionada e movida para o ambiente.
+- domain modeling;
+- financial correctness;
+- broader testing;
+- atomic operations;
+- dates/timezones;
+- migration safety;
+- idempotency;
+- operational maturity;
+- product-driven architecture.
 
 ---
 
-## Dia 4 — Auth, autorização e Pull Request
+## Sprint log
 
-- [x] Sei diferenciar authentication de authorization.
-- [x] Tenho teste de acesso cruzado entre usuários.
-- [x] Trabalho em branch e reviso meu próprio diff.
-- [x] A PR passou por review do Codex em modo sênior.
+### Sprint 0
 
-**Notas:**
-- authentication comprovada pelo redirect de usuário anônimo;
-- autorização comprovada manualmente: user_a não acessa o projeto 3 e user_b não acessa o projeto 2;
-- `owner` permanece nullable durante a fase de expansão, até existir um backfill reproduzível;
-- revisão local feita contra `main`, pois ainda não existe remoto configurado.
+**Goal:** Product pivot and finance foundation.
 
----
+#### What I implemented
+-
 
-## Dia 5 — Código sustentável e Ruff
+#### Decisions I made
+-
 
-- [x] Ruff passa.
-- [x] Consigo justificar QuerySet/Manager/service usados.
-- [x] Removi duplicação real sem abstração prematura.
-- [x] Consigo apontar um trade-off da minha estrutura atual.
+#### Bugs I investigated
+-
 
-**Notas:**
-- Ruff configurado como linter e formatter;
-- pre-commit executa Ruff antes de commits com arquivos Python;
-- `ProjectQuerySet.owned_by()` centraliza a consulta por owner;
-- views atuais permanecem pequenas; não foi criado service sem necessidade;
-- trade-off: `owned_by()` facilita uso seguro, mas não impede consultas que esqueçam o escopo do owner.
+#### Review findings I received
+-
 
----
+#### Concepts I had to learn
+-
 
-## Dia 6 — Testes
+#### What I can now explain without help
+-
 
-- [x] Testes são independentes e determinísticos.
-- [x] Tenho testes de permissão e validação.
-- [x] Sei explicar Arrange–Act–Assert.
-- [x] Um bug relevante ganhou teste de regressão.
+#### Recurring mistake to watch
+-
 
-**Notas:**
-- suíte com 6 testes executada também em ordem aleatória;
-- `TestCase` usa banco isolado e cada teste prepara seus próprios dados;
-- criação válida, formulário inválido, usuário anônimo e acesso entre owners estão protegidos;
-- `refresh_from_db()` confirma o estado realmente persistido;
-- role PostgreSQL local recebeu `CREATEDB` para criar o banco de teste; produção não deve receber essa permissão.
+#### Senior assessment
+-
 
 ---
 
-## Dia 7 — ORM eficiente e CI
+### Sprint 1
 
-- [x] Sei reconhecer N+1.
-- [x] Sei diferenciar `select_related` de `prefetch_related`.
-- [x] CI executa checks/testes.
-- [x] Sei explicar CI versus CD.
+**Goal:** Transactions and categories.
 
-**Notas:**
-- N+1 reproduzido com 5 queries onde eram esperadas 3;
-- `annotate(Count("tasks"))` mantém a listagem em 3 queries;
-- `LEFT OUTER JOIN` preserva projetos com zero tarefas;
-- `select_related` atende relações únicas e `prefetch_related` atende coleções;
-- GitHub Actions executa Ruff, Django checks, migrations check e 7 testes no PostgreSQL 18.6;
-- branch `main` exige PR e o status check `checks` verde;
-- CI valida mudanças; CD entrega ou implanta o código depois dos checks.
+#### What I implemented
+-
 
----
+#### Decisions I made
+-
 
-## Dia 8 — Docker / Compose
+#### Bugs I investigated
+-
 
-- [x] Sei explicar image, container, layer e Dockerfile.
-- [x] Sei explicar volume versus bind mount.
-- [x] Entendo networking do Compose e por que `localhost` costuma estar errado entre containers.
-- [x] `docker compose up` inicia app + PostgreSQL.
-- [x] Sei dizer quais dados sobrevivem a `docker compose down`.
+#### Review findings I received
+-
 
-**Notas:**
-- Dockerfile de desenvolvimento usa Python 3.13 e instala `requirements-dev.txt`;
-- image é o modelo em layers; container é uma instância executável e descartável;
-- bind mount `.:/app` sincroniza o código local com o container;
-- named volume `postgres_data` preserva os dados do PostgreSQL;
-- serviços do Compose se encontram por DNS: Django usa `db:5432`, não `localhost`;
-- PostgreSQL 18 usa o volume em `/var/lib/postgresql`;
-- `docker compose down` preserva o volume; `down -v` também o remove;
-- stack completa iniciou e os 7 testes passaram dentro do container.
+#### Concepts I had to learn
+-
+
+#### What I can now explain without help
+-
+
+#### Recurring mistake to watch
+-
+
+#### Senior assessment
+-
 
 ---
 
-## Dia 9 — Staging e produção
+## Competency matrix
 
-- [x] Sei explicar `DEBUG`, `ALLOWED_HOSTS` e secrets.
-- [x] Sei por que `runserver` não é servidor de produção.
-- [x] `check --deploy` foi entendido/executado.
-- [x] Sei diferenciar local, test, staging e production.
+Use:
+- `N` — not yet demonstrated
+- `A` — assisted
+- `I` — independent
+- `R` — reliable / repeatable
 
-**Notas:**
-- settings separados em `base`, `development` e `production`;
-- development carrega `.env`, usa `DEBUG=True` e e-mail no console;
-- production exige hosts e HSTS pelo ambiente, usa `DEBUG=False` e cookies seguros;
-- `check --deploy` deixou apenas warnings de HSTS para subdomínios e preload, adiados até existir domínio real;
-- Gunicorn 26.2 substitui `runserver` e executa com dois workers;
-- control socket do Gunicorn foi desabilitado porque o container não precisa de `gunicornc`;
-- image de produção executa como usuário `django`, não contém `.env`, Ruff ou dependências de desenvolvimento;
-- `collectstatic` incorporou 130 arquivos à image; proxy ou plataforma ainda deverá servi-los;
-- staging e production usam a mesma image, mas bancos, domínios e secrets separados;
-- CI valida os settings e constrói a image de produção;
-- a mudança de localização de `settings.py` exigiu corrigir o cálculo de `BASE_DIR`.
-
----
-
-## Dia 10 — Release, migration e rollback
-
-- [x] Sei explicar artefato imutável.
-- [x] Criei uma tag de release.
-- [x] Entendo expand/migrate/switch/contract.
-- [x] Sei explicar estratégia de rollback e seus limites com banco.
-- [x] README permite outra pessoa iniciar o projeto.
-- [x] PR/release final recebeu review sênior.
-
-**Notas:**
-- a migration de dados atribui projetos órfãos a uma conta técnica inativa e sem senha utilizável;
-- a migration seguinte torna `Project.owner` obrigatório no banco;
-- o fluxo de migration foi validado em um banco temporário, inclusive com conflito da conta técnica;
-- a image de produção usa Gunicorn, usuário sem privilégios, porta configurável e WhiteNoise;
-- a mesma image foi validada com PostgreSQL do staging;
-- o workflow de release publicou no GHCR uma tag SemVer e uma tag ligada ao commit;
-- rollback da aplicação reutiliza uma image anterior; rollback do banco precisa ser analisado separadamente.
-- a tag `v0.1.0` aponta para o commit revisado da `main`;
-- o GHCR publicou a image por tag e pelo digest imutável;
-- a branch de produção do Neon foi migrada após a criação de `backup-pre-v0.1.0`;
-- a release foi implantada no Render usando exatamente o digest publicado;
-- o primeiro health check retornou `400` porque `ALLOWED_HOSTS` estava incorreto;
-- após corrigir o hostname, health check, autenticação, PostgreSQL e static files foram validados;
-- o rollback entre deploys foi simulado e os dados permaneceram;
-- como esta é a primeira versão, um downgrade real de código dependerá de uma release futura.
-
----
-
-## Registro de bugs
-
-| Data | Sintoma | Causa-raiz | Como diagnostiquei | Teste de regressão? |
-|---|---|---|---|---|
-| | | | | |
-
-## Decisões de arquitetura
-
-| Decisão | Alternativas consideradas | Por que escolhi | Quando reavaliar |
-|---|---|---|---|
-| | | | |
-
-## Findings recorrentes de PR review
-
-| Tema | Ocorrências | O que vou fazer diferente |
+| Competency | Level | Evidence |
 |---|---:|---|
-| | | |
+| Django request/response | R | Phase 1 |
+| Basic ORM | R | Phase 1 |
+| Ownership authorization | I/R | Phase 1; continue validating |
+| Database constraints | I | Phase 1 |
+| Query performance | I | Phase 1 query-count work |
+| Test design | I | Needs broader financial coverage |
+| Docker | I | Phase 1 |
+| CI/release | I | Needs more release-safety practice |
+| Financial domain modeling | N | Phase 2 |
+| Decimal/money semantics | N | Phase 2 |
+| Timezone/date modeling | A | Phase 2 target |
+| Atomic business operations | N | Future accounts/transfers |
+| Idempotency | N | Future import |
+| Observability | A | Future production maturity |
+| Incident debugging | A | Future simulations |
+| ADR/design communication | A | Phase 2 |
+| API design | N/A | Later |
+| React | N/A | Later learning phase |
+| Open Finance | N/A | Future R&D |
+
+---
+
+## Bug journal
+
+For meaningful bugs, record:
+
+```text
+Bug:
+Symptom:
+Root cause:
+Why I initially missed it:
+How I proved the cause:
+Regression test:
+Lesson:
+```
+
+Do not log every typo.
+
+---
+
+## Review-pattern journal
+
+When the same code-review issue appears more than once:
+
+```text
+Pattern:
+Examples:
+Why it happens:
+New personal checklist item:
+```
+
+The goal is to stop repeating the same class of mistake.
+
+---
+
+## Promotion criteria
+
+### Junior I → Junior II
+
+Evidence should show:
+
+- can implement a ticket without step-by-step guidance;
+- proposes reasonable tests before coding;
+- consistently enforces ownership;
+- explains model/query decisions;
+- responds well to review findings;
+- can diagnose ordinary bugs.
+
+### Junior II → Junior III
+
+Evidence should show:
+
+- handles ambiguous requirements;
+- proposes safe migrations;
+- reasons about transaction boundaries;
+- notices performance/data-integrity risks;
+- can write small ADRs;
+- investigates production-like incidents;
+- anticipates rollback/operational consequences.
+
+Promotion is based on evidence, not elapsed time.
