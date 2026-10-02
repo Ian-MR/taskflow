@@ -10,11 +10,11 @@ A versão da Fase 1 permanece preservada pela tag `v0.1.0`.
 
 ## Estado atual
 
-O projeto está no início da Fase 2.
+O projeto está na Fase 2.
 
-A implementação existente ainda contém o domínio legado do TaskFlow.
-A transição para o domínio financeiro será feita gradualmente durante os
-próximos tickets.
+O domínio legado do TaskFlow foi removido. A aplicação preserva autenticação, usuários, PostgreSQL, testes, CI, Docker e a configuração de produção construídos durante a Fase 1.
+
+Enquanto o domínio financeiro ainda não foi implementado, usuários autenticados acessam uma home temporária.
 
 ## Objetivo da V1
 
@@ -92,7 +92,7 @@ A V1 não inclui:
 
 7. Acesse:
 
-    - Aplicação: http://127.0.0.1:8000/projects/
+    - Aplicação: http://127.0.0.1:8000/
     - Healthcheck: http://127.0.0.1:8000/health/
 
 ## Comandos úteis
@@ -169,20 +169,10 @@ A imagem executa a aplicação com Gunicorn e um usuário sem privilégios. Segr
 
 ## Estratégia de migrations e rollback
 
-A obrigatoriedade do proprietário de um projeto foi implementada em etapas compatíveis:
+As migrations `0001` a `0005` preservam o histórico de evolução do TaskFlow.
 
-1. **Expand:** a migration `0003` adicionou `owner` permitindo `NULL`.
-2. **Switch:** a aplicação passou a associar novos projetos ao usuário autenticado.
-3. **Migrate:** a migration `0004` atribuiu um usuário técnico aos registros legados sem proprietário.
-4. **Contract:** a migration `0005` tornou `owner_id` obrigatório no banco.
+A migration `0006` remove os models e as tabelas de Project e Task. Os dados eram sintéticos e sua exclusão foi aceita durante a transição para a Fase 2. Usuários e autenticação não são removidos.
 
-Antes de migrations em produção, deve ser criado e validado um backup do banco.
+Reverter a migration `0006` pode recriar a estrutura das tabelas, mas não recupera os registros apagados. O código da Fase 1 permanece disponível pela tag `v0.1.0`.
 
-O rollback da aplicação deve reutilizar a imagem anterior identificada por tag ou digest, sem reconstruí-la. O rollback do banco exige análise separada:
-
-- a `0005` pode voltar a permitir `NULL`;
-- a `0004` possui reverse migration sem operação;
-- proprietários atribuídos durante o backfill não são removidos automaticamente, pois isso poderia apagar uma associação válida.
-
-Portanto, voltar o código não significa necessariamente desfazer os dados.
-Migrations destrutivas exigem uma estratégia específica de recuperação.
+O app `projects` permanece temporariamente instalado para que o Django possa carregar seu histórico de migrations.

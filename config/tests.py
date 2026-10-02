@@ -63,3 +63,10 @@ class HealthViewTests(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json(), {"status": "ok"})
+
+
+class LegacyDomainRetirementTests(TestCase):
+    def test_legacy_projects_routes_are_unavailable(self):
+        response = self.client.get("/projects/")
+
+        self.assertEqual(response.status_code, 404)
