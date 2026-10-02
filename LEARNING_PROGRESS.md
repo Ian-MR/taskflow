@@ -44,28 +44,53 @@ Phase 2 focus:
 **Goal:** Product pivot and finance foundation.
 
 #### What I implemented
--
+
+- Remoção do domínio legado, preservando autenticação e usuários.
+- Documentação das regras financeiras e da política de dados.
+- Script de verificações locais com build opcional de produção.
 
 #### Decisions I made
--
+
+- Regras de transações e categorias registradas nos ADRs.
+- Uso de dados sintéticos durante o desenvolvimento.
+- Deploy adiado até uma versão mais utilizável.
 
 #### Bugs I investigated
--
+
+- Nenhum bug relevante registrado nesta sprint.
 
 #### Review findings I received
--
+
+- Ajustes de escrita e formatação na documentação.
+- Alinhamento do nome do script com os comandos documentados.
 
 #### Concepts I had to learn
--
+
+- Registro de decisões em ADRs.
+- Scripts Bash, permissões de execução e argumentos.
+- Limites do .gitignore diante de arquivos já rastreados e do histórico.
 
 #### What I can now explain without help
--
+
+- Ainda preciso avaliar minha autonomia nos conceitos novos.
 
 #### Recurring mistake to watch
--
+
+- Nenhum erro recorrente identificado.
 
 #### Senior assessment
--
+
+- Participou das decisões de domínio e concluiu as entregas com orientação.
+- Verificações locais e CI passaram na FIN-006.
+- A implementação financeira na próxima sprint permitirá avaliar a aplicação das regras definidas.
+
+#### Retrospective
+
+- O trabalho planejado funcionou conforme esperado.
+- A quantidade de documentação e de etapas para escrever tornou o processo cansativo.
+- Na próxima sprint, agrupar atualizações documentais e evitar repetir informações.
+- Não identifiquei um erro técnico recorrente.
+- O deploy foi adiado até existir uma versão mais utilizável; produção permanece na versão anterior.
 
 ---
 
