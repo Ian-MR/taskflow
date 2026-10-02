@@ -6,3 +6,24 @@ __pycache__/
 *.py[cod]
 db.sqlite3
 staticfiles/
+
+# Financial data and imports
+*.csv
+*.ofx
+*.qfx
+/imports/
+/exports/
+
+# Database dumps and backups
+*.sql
+*.dump
+*.backup
+*.pgdump
+/backups/
+
+# Private keys and certificates
+*.key
+*.pem
+*.p12
+*.pfx
+*.log

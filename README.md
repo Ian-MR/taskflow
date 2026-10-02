@@ -176,3 +176,9 @@ A migration `0006` remove os models e as tabelas de Project e Task. Os dados era
 Reverter a migration `0006` pode recriar a estrutura das tabelas, mas não recupera os registros apagados. O código da Fase 1 permanece disponível pela tag `v0.1.0`.
 
 O app `projects` permanece temporariamente instalado para que o Django possa carregar seu histórico de migrations.
+
+## Segurança e tratamento de dados
+
+Desenvolvimento, testes e staging utilizam somente dados sintéticos.
+
+Consulte a [política de tratamento de dados financeiros](docs/security/data-handling.md) antes de trabalhar com exports, backups, credenciais ou dados reais.
