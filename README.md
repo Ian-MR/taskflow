@@ -143,6 +143,18 @@ docker compose exec web python manage.py test --shuffle
 
 O pipeline de CI executa lint, verificação de formatação, checks do Django, verificação de migrations, testes com PostgreSQL e build da imagem de produção.
 
+As mesmas verificações podem ser executadas por um único script:
+
+```bash
+./scripts/check.sh
+```
+
+Para também construir a imagem de produção ao final das verificações:
+
+```bash
+./scripts/check.sh --production
+```
+
 ## Configuração de produção
 
 A aplicação possui settings separados:
