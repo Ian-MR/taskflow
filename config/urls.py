@@ -22,6 +22,7 @@ from config import views as config_views
 from projects import views as projects_views
 
 urlpatterns = [
+    path("", config_views.home, name="home"),
     path("accounts/", include("django.contrib.auth.urls")),
     path("admin/", admin.site.urls),
     path("projects/", projects_views.project_list, name="project-list"),
